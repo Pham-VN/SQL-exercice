@@ -1,0 +1,39 @@
+// Afficher le nom des clients.
+SELECT nomcli FROM Clients;
+// Afficher toutes les informations sur tous les films
+SELECT * FROM Films;
+// La liste des codes des films loués sans doublon
+SELECT DISTINCT codefilm FROM Locations;
+// Afficher sans doublon, les codes des films loués dans une colonne portant le titre "Le code des films loués".
+SELECT DISTINCT codefilm AS "Le code des films loués"FROM Locations;
+//Afficher les informations sur les produits dans l'ordre croissant des prix
+SELECT * FROM Produit 
+ORDER BY prixpro ASC;
+// Afficher toutes les informations sur les produits dans l'ordre décroissant des prix.
+SELECT * FROM Produit 
+ORDER BY prixpro DESC;
+//Afficher toutes les informations sur les clients dans l'ordre alphabétique des villes.
+SELECT * FROM Clients 
+ORDER BY villecli;
+//Afficher le nom des films dans l'ordre alphabétique inverse.
+SELECT nomfilm FROM Films 
+ORDER BY nomfilm DESC;
+////Afficher les locations de la plus ancienne à la plus récente
+SELECT * FROM Locations 
+ORDER BY datedebut ASC;
+//Afficher pour chaque film loué, le nom du film et la date de location. Le resultat devra être trié dans l'ordre alphabétique des films
+SELECT Films.nomfilm, Locations.datedebut 
+FROM Films
+INNER JOIN Locations ON Films.codefilm = Locations.codefilm
+ORDER BY Films.nomfilm;
+//Afficher sans doublon le nom des villes dans lesquelles des clients ont loué des films. Le résultat sera trié dans l'ordre alphabétique des villes
+SELECT DISTINCT Clients.villecli 
+FROM Clients
+INNER JOIN Locations ON Clients.codecli = Locations.codecli
+ORDER BY villecli ASC;
+// la commande LEFT JOIN (aussi appelée LEFT OUTER JOIN) est un type de jointure entre 2 tables. Cela permet de lister tous les résultats de la table de gauche (left = gauche) même s’il n’y a pas de correspondance dans la deuxième tables.
+//Afficher les numéros et les villes des clients en indiquant pour ceux qui ont loué des films, le numéro du film emprunté. Le résultat sera affiché dans l'ordre alphabétique des villes.
+SELECT Clients.codecli, Clients.villecli, Locations.codefilm
+FROM Clients 
+LEFT JOIN  Locations ON Clients.codecli = Locations.codecli
+ORDER BY  villecli ASC;
