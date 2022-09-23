@@ -37,3 +37,39 @@ SELECT Clients.codecli, Clients.villecli, Locations.codefilm
 FROM Clients 
 LEFT JOIN  Locations ON Clients.codecli = Locations.codecli
 ORDER BY  villecli ASC;
+// Pour chaque client qui a loué un film, le nom du client, le nom du film loué, et la date de début de la location. Le résultat sera affiché dans l'ordre alphabétique des noms des clients
+SELECT nomcli, nomfilm, datedebut
+FROM Clients
+INNER JOIN Locations ON Clients.codecli = Locations.codecli
+INNER JOIN Films ON Locations.codefilm = Films.codefilm
+ORDER BY nomcli ASC;
+// Afficher le nom du client n°1 dans une colonne qui portera comme titre "Nom du client n°1"
+SELECT nomcli AS "Nom du client n°1" FROM Clients
+WHERE codecli = 1; 
+// Afficher le nom des clients qui commencent par un 'c' classé dans l'ordre alphabétique.
+Select nomcli From Clients
+Where nomcli LIKE "c%"
+ORDER BY nomcli;
+// Afficher les codes des films, leur noms et la date de début de location des films loués entre le 09/04/2013 et le 11/04/2013. Le résultat sera trié dans l'ordre inverse des dates de début de location.
+SELECT Locations.codefilm, Films.nomfilm, Locations.datedebut
+From Locations
+INNER JOIN Films ON Locations.codefilm = Films.codefilm
+WHERE datedebut BETWEEN '2013-04-09' AND '2013-04-11';
+// Le nombre total de jours de location du client 1 dans une colonne qui portera comme titre "Nombre de jour de location client 1"
+SELECT  SUM(duree) AS "Nombre de jour de location client 1"
+FROM Locations
+WHERE codecli = 1;
+//La date de location la plus ancienne dans une colonne qui portera le titre "Date la plus ancienne".
+SELECT MIN(datedebut) AS "Date la plus ancienne"
+FROM Locations;
+// Le nombre de clients dans chaque ville dans une colonne qui s'appelle "Nombre de clients par ville"
+SELECT COUNT(Clients.villecli) AS "Nombre de clients par ville"
+FROM Clients
+WHERE villecli IN ("Saint-Avold","Forbach","Freyming") 
+Group BY Clients.villecli;
+//Le nom de chaque film avec la durée de location la plus longue. Le résultat sera affiché dans l'ordre alphabétique des noms des films.
+SELECT Films.nomfilm, MAX(Locations.duree) as "MAX(duree)"
+FROM Films
+INNER JOIN Locations ON Films.codefilm = Locations.codefilm
+GROUP BY Locations.codefilm
+ORDER BY nomfilm;
