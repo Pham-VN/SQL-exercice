@@ -1,0 +1,22 @@
+///Saisissez la requête qui permettra d'insérer le film n°12 "The Raid" et le films n°13 "Le loup de Wall Street".
+
+INSERT INTO Films("12","The Raid"),(13,"Le loup de Wall Street");
+
+INSERT INTO Clients ("codecli", "prenomcli","nomcli")
+VALUES("124","Jean","Talu");
+
+// 
+Supprimez toutes les lignes de la table Locations qui contiennent le CodeFilm 1
+DELETE FROM Locations WHERE codefilm = 1;
+
+// 
+Saisissez la requête qui permettra d'appeler tous les films "Fallait pas oublier la restriction !"
+
+UPDATE Films 
+SET nomfilm = "Fallait pas oublier la restriction !";
+
+// Saisissez la requête qui permettra d'indiquer que le film n°8 s'appelle "Matrix 2"
+UPDATE Films
+SET nomfilm = "Matrix 2" WHERE codefilm = "8";
+
+// 
