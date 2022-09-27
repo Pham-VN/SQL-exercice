@@ -20,3 +20,16 @@ UPDATE Films
 SET nomfilm = "Matrix 2" WHERE codefilm = "8";
 
 // 
+Effacer les tables location et clients
+DROP TABLE Locations;
+DROP TABLE Clients;
+
+// 
+
+Les noms des clients dont le total des jours de location est supérieur à 4. Le résultat sera classé dans l'ordre alphabétique des noms des clients.
+SELECT nomcli, SUM (duree) as "Durée totale"
+FROM Clients
+INNER JOIN Locations ON Clients.codecli = Locations.codecli
+GROUP BY nomcli
+HAVING SUM (duree) > 4
+ORDER BY nomcli;
